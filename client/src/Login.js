@@ -158,6 +158,7 @@ const Login = ({ user, login }) => {
                       label="E-mail address"
                       name="username"
                       type="text"
+                      fullWidth
                       className={classes["email-field"]}
                     />
                   </FormControl>
@@ -173,6 +174,7 @@ const Login = ({ user, login }) => {
                       aria-label="password"
                       type="password"
                       name="password"
+                      fullWidth
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position="end">

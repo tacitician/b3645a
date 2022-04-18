@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
       position: "relative",
       height: "100vh",
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.down("md")]: {
       height: "100%",
     },
     objectFit: "contain",

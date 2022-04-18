@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     height: "3.5rem",
     borderRadius: ".25rem",
     [theme.breakpoints.down("md")]: {
-      top: `12rem`,
+      top: `18rem`,
     },
   },
 }));
@@ -173,19 +173,20 @@ const Signup = ({ user, register }) => {
                         name="username"
                         type="text"
                         required
+                        fullWidth
                         className={classes["username-field"]}
                       />
                     </FormControl>
                   </Grid>
                   <Grid>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth className={classes["email-field"]}>
                       <TextField
                         label="E-mail address"
                         aria-label="e-mail address"
                         type="email"
                         name="email"
                         required
-                        className={classes["email-field"]}
+                        fullWidth
                       />
                     </FormControl>
                   </Grid>
@@ -193,6 +194,7 @@ const Signup = ({ user, register }) => {
                     <FormControl
                       error={!!formErrorMessage.confirmPassword}
                       fullWidth
+                      className={classes["password-field"]}
                     >
                       <TextField
                         aria-label="password"
@@ -201,7 +203,7 @@ const Signup = ({ user, register }) => {
                         inputProps={{ minLength: 6 }}
                         name="password"
                         required
-                        className={classes["password-field"]}
+                        fullWidth
                       />
                       <FormHelperText>
                         {formErrorMessage.confirmPassword}
@@ -220,6 +222,7 @@ const Signup = ({ user, register }) => {
                         inputProps={{ minLength: 6 }}
                         name="confirmPassword"
                         required
+                        fullWidth
                         className={classes["confirm-password-field"]}
                       />
                       <FormHelperText>
