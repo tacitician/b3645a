@@ -3,6 +3,7 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { Grid, CssBaseline, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import moment from "moment";
 
 import { SidebarContainer } from "../components/Sidebar";
 import { ActiveChat } from "../components/ActiveChat";
@@ -80,7 +81,7 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      let convos = [...conversations];
+      let convos = JSON.parse(JSON.stringify(conversations));
       convos.forEach((convo) => {
         if (convo.otherUser.id === recipientId) {
           convo.messages.push(message);
@@ -106,7 +107,7 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
-      let convos = [...conversations];
+      let convos = JSON.parse(JSON.stringify(conversations));
       convos.forEach((convo) => {
         if (convo.id === message.conversationId) {
           convo.messages.push(message);
@@ -184,7 +185,13 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
-        setConversations(data);
+        const orderedConversationMessages = JSON.parse(JSON.stringify(data));
+        orderedConversationMessages.forEach((convo) => {
+          convo.messages.sort((a, b) => {
+            return moment.utc(a.createdAt).diff(moment.utc(b.createdAt));
+          });
+        });
+        setConversations(orderedConversationMessages);
       } catch (error) {
         console.error(error);
       }
