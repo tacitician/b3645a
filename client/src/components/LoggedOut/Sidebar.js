@@ -6,7 +6,7 @@ import bubble from "../../assets/bubble.svg";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
-    height: "100vh",
+    height: "100%",
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },

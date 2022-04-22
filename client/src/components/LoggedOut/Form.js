@@ -24,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
   "sign-in-button": {
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.35)",
-    width: "10rem",
-    height: "3.5rem",
-    borderRadius: ".25rem",
+    width: "160px",
+    height: "56px",
+    borderRadius: "3px",
   },
 }));
 
