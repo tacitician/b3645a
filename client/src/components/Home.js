@@ -81,15 +81,19 @@ const Home = ({ user, logout }) => {
 
   const addNewConvo = useCallback(
     (recipientId, message) => {
-      let convos = JSON.parse(JSON.stringify(conversations));
-      convos.forEach((convo) => {
-        if (convo.otherUser.id === recipientId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-          convo.id = message.conversationId;
-        }
+      setConversations((prev) => {
+        prev.map((convo) => {
+          if (convo.otherUser.id === recipientId) {
+            const convoCopy = { ...convo };
+            convoCopy.messages = [...convoCopy.messages, message];
+            convoCopy.latestMessageText = message.text;
+            convoCopy.id = message.conversationId;
+            return convoCopy;
+          } else {
+            return convo;
+          }
+        });
       });
-      setConversations(convos);
     },
     [setConversations, conversations]
   );
@@ -107,14 +111,18 @@ const Home = ({ user, logout }) => {
         setConversations((prev) => [newConvo, ...prev]);
       }
 
-      let convos = JSON.parse(JSON.stringify(conversations));
-      convos.forEach((convo) => {
-        if (convo.id === message.conversationId) {
-          convo.messages.push(message);
-          convo.latestMessageText = message.text;
-        }
-      });
-      setConversations(convos);
+      setConversations((prev) =>
+        prev.map((convo) => {
+          if (convo.id === message.conversationId) {
+            const convoCopy = { ...convo };
+            convoCopy.messages = [...convoCopy.messages, message];
+            convoCopy.latestMessageText = message.text;
+            return convoCopy;
+          } else {
+            return convo;
+          }
+        })
+      );
     },
     [setConversations, conversations]
   );
@@ -185,12 +193,16 @@ const Home = ({ user, logout }) => {
     const fetchConversations = async () => {
       try {
         const { data } = await axios.get("/api/conversations");
-        const orderedConversationMessages = JSON.parse(JSON.stringify(data));
-        orderedConversationMessages.forEach((convo) => {
-          convo.messages.sort((a, b) => {
+        console.log(data);
+        const orderedConversationMessages = data.map((convo) => {
+          const convoCopy = { ...convo };
+          convoCopy.messages = [...convo.messages].sort((a, b) => {
             return moment.utc(a.createdAt).diff(moment.utc(b.createdAt));
           });
+          return convoCopy;
         });
+        console.log(data);
+
         setConversations(orderedConversationMessages);
       } catch (error) {
         console.error(error);
