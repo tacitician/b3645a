@@ -4,13 +4,13 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
-    bottom: "0",
-    right: `42px`,
-    top: "30px",
+    paddingRight: `42px`,
+    paddingTop: "30px",
     height: "54px",
+    paddingLeft: "42px",
 
     display: "flex",
+    justifyContent: "flex-end",
     alignItems: "center",
   },
   "register-text": {

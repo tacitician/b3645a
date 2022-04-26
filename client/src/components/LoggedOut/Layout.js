@@ -5,18 +5,17 @@ import Sidebar from "./Sidebar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
+    display: "grid",
+    gridTemplateColumns: "auto 1fr",
     [theme.breakpoints.up("md")]: {
       height: "100vh",
     },
   },
   wrapper: {
     display: "flex",
+    flexDirection: "column",
     height: "100%",
-  },
-  container: {
-    display: "flex",
-    height: "100%",
+    width: "100%",
   },
 }));
 
@@ -25,25 +24,7 @@ const Layout = ({ children }) => {
   return (
     <Grid component="main" className={classes.root}>
       <Sidebar />
-      <Box>
-        <Grid>
-          <Grid
-            container
-            justifyContent="center"
-            alignItems="center"
-            className={classes.wrapper}
-          >
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              className={classes.container}
-            >
-              <Box width="100%">{children} </Box>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Box>
+      <Box className={classes.wrapper}>{children}</Box>
     </Grid>
   );
 };

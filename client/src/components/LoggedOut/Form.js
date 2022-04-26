@@ -3,11 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   form: {
-    position: "absolute",
-    top: "170px",
-    paddingRight: "122px",
+    display: "grid",
+    padding: "0 97px",
+    paddingTop: "86px",
 
-    paddingLeft: "97px",
+    [theme.breakpoints.down("sm")]: {
+      padding: "0 10px",
+      paddingTop: "40px",
+    },
+
     "& .MuiFormLabel-root": {
       fontSize: "14px",
       color: theme.palette.secondary.main,

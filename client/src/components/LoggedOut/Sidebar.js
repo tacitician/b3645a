@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       display: "none",
     },
-    objectFit: "contain",
+    objectFit: "cover",
     isolation: "isolate",
     overflow: "hidden",
     "&::before": {
@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   image: {
-    width: "100%",
+    width: "auto",
     height: "100%",
     zIndex: "1",
   },
