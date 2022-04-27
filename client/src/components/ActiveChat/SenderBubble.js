@@ -1,41 +1,62 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { Box, Typography } from '@material-ui/core';
+import React from "react";
+import { Box, Grid, Typography } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-  },
-  date: {
-    fontSize: 11,
-    color: '#BECCE2',
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  text: {
-    fontSize: 14,
-    color: '#91A3C0',
-    letterSpacing: -0.2,
-    padding: 8,
-    fontWeight: 'bold',
-  },
-  bubble: {
-    background: '#F4F6FA',
-    borderRadius: '10px 10px 0 10px',
-  },
-}));
+const SenderBubble = ({ time, text, attachments, classes }) => {
+  if (attachments.length === 0) {
+    return (
+      <Box className={classes["sender-root"]}>
+        <Typography className={classes.date}>{time}</Typography>
+        <Box className={classes["sender-bubble"]}>
+          <Typography className={classes["sender-text"]}>{text}</Typography>
+        </Box>
+      </Box>
+    );
+  }
 
-const SenderBubble = ({ time, text }) => {
-  const classes = useStyles();
+  if (attachments.length > 1) {
+    return (
+      <Box className={classes["sender-root"]}>
+        <Box className={classes["sender-bubble"]}>
+          <Typography className={classes["sender-text"]}>{text}</Typography>
+        </Box>
+        <Grid className={classes["sender-grid"]}>
+          {attachments?.map((attachment) => (
+            <Box key={attachment}>
+              <img
+                src={attachment}
+                alt={"A chat message attachment"}
+                className={`${classes.attachment} ${classes.attachments}`}
+              />
+            </Box>
+          ))}
+        </Grid>
+        <Typography
+          className={`${classes.date} ${classes["multiple-image-data"]}`}
+        >
+          {time}
+        </Typography>
+      </Box>
+    );
+  }
 
   return (
-    <Box className={classes.root}>
+    <Box className={classes["sender-root"]}>
       <Typography className={classes.date}>{time}</Typography>
-      <Box className={classes.bubble}>
-        <Typography className={classes.text}>{text}</Typography>
-      </Box>
+      <Grid className={classes.container}>
+        <img
+          key={attachments[0]}
+          src={attachments[0]}
+          alt={"A chat message attachment"}
+          className={classes.attachment}
+        />
+        {text && (
+          <Box
+            className={`${classes["sender-bubble"]} ${classes["single-text-with-attachment"]}`}
+          >
+            <Typography className={classes["sender-text"]}>{text}</Typography>
+          </Box>
+        )}
+      </Grid>
     </Box>
   );
 };
