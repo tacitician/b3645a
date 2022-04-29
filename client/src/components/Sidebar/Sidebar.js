@@ -1,7 +1,7 @@
-import React from 'react';
-import { Box, Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import { Search, Chat, CurrentUser } from './index';
+import React from "react";
+import { Box, Typography } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Search, Chat, CurrentUser } from "./index";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
   title: {
     fontSize: 20,
     letterSpacing: -0.29,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 32,
     marginBottom: 15,
   },
