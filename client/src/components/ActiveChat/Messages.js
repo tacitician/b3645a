@@ -111,30 +111,28 @@ const Messages = (props) => {
 
   return (
     <Box className={classes.root}>
-      {messages
-        .sort((a, b) => moment.utc(a.createdAt).diff(moment.utc(b.createdAt)))
-        .map((message) => {
-          const time = moment(message.createdAt).format("h:mm");
+      {messages.map((message) => {
+        const time = moment(message.createdAt).format("h:mm");
 
-          return message.senderId === userId ? (
-            <SenderBubble
-              key={message.id}
-              text={message.text}
-              time={time}
-              attachments={message.attachments}
-              classes={classes}
-            />
-          ) : (
-            <OtherUserBubble
-              key={message.id}
-              text={message.text}
-              time={time}
-              otherUser={otherUser}
-              attachments={message.attachments}
-              classes={classes}
-            />
-          );
-        })}
+        return message.senderId === userId ? (
+          <SenderBubble
+            key={message.id}
+            text={message.text}
+            time={time}
+            attachments={message.attachments}
+            classes={classes}
+          />
+        ) : (
+          <OtherUserBubble
+            key={message.id}
+            text={message.text}
+            time={time}
+            otherUser={otherUser}
+            attachments={message.attachments}
+            classes={classes}
+          />
+        );
+      })}
     </Box>
   );
 };

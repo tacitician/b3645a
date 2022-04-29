@@ -2,7 +2,11 @@ import React from "react";
 import { Box, Grid, Typography } from "@material-ui/core";
 
 const SenderBubble = ({ time, text, attachments, classes }) => {
-  if (attachments.length === 0) {
+  if (
+    attachments.length === 0 ||
+    attachments === null ||
+    !attachments?.length
+  ) {
     return (
       <Box className={classes["sender-root"]}>
         <Typography className={classes.date}>{time}</Typography>

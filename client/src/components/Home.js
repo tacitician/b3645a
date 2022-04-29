@@ -79,10 +79,6 @@ const Home = ({ user, logout }) => {
     }
   };
 
-  useEffect(() => {
-    console.log(conversations);
-  }, [conversations]);
-
   const addNewConvo = useCallback(
     (recipientId, message) => {
       setConversations((prev) =>
